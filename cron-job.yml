@@ -1,45 +1,44 @@
-kind: CronJob
 apiVersion: batch/v1
+kind: CronJob
 metadata:
- name: nginx-cronjob-backup
- namespace: nginx
+  name: nginx-cronjob-backup
+  namespace: nginx
 spec:
-  schedule: "* * * * *"  
+  schedule: "* * * * *"   # runs every minute
   jobTemplate:
     spec:
-       template: 
+      template:
         metadata:
-           name: nginx-cronjob-backup
-           labels:
-             app: nginx-cronjob-backup
-        spec: 
-         containers: 
-         - name: nginx-cronjob-pod
-           image: busybox:latest
-           command:
-           - sh
-           - -c
-           - >
-             echo "Backup Started"
-             mkdir -p /backups &&
-             mkdir -p /demo-data &&
-             cp -r /demo-data /backups &&
-             echo "Backup Completed" ;
-         volumeMounts:
-              - name: data-volume
-                mountPath: /demo-data
-              - name: backup-volume
-                mountPath: /backups
-        restartPolicy: OnFailure
-        volumes:
-         - name: data-volume
-           hostPath: 
-             path: /demo-data
-             type: DirectoryOrCreate
-         - name: data-volume
-           hostPath:
-              path:  /backups
-              type: DirectoryOrCreate
-              
+          labels:
+            app: nginx-cronjob-backup
+        spec:
+          containers:
+          - name: nginx-cronjob-pod
+            image: busybox:latest
+            command:
+            - sh
+            - -c
+            - |
+              echo "Backup Started"
+              mkdir -p /demo-data
+              mkdir -p /backups
+              cp -r /demo-data/* /backups/
+              echo "Backup Completed"
+            volumeMounts:
+            - name: data-volume
+              mountPath: /demo-data
+            - name: backup-volume
+              mountPath: /backups
 
-           
+          restartPolicy: OnFailure
+
+          volumes:
+          - name: data-volume
+            hostPath:
+              path: /demo-data
+              type: DirectoryOrCreate
+
+          - name: backup-volume
+            hostPath:
+              path: /backups
+              type: DirectoryOrCreate
