@@ -9,7 +9,7 @@ spec:
     spec:
        template: 
           metadata:
-             name: nginx-cronjob-backup
+            name: nginx-cronjob-backup
            labels:
              app: nginx-cronjob-backup
         spec: 
