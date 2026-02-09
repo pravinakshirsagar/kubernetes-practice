@@ -33,12 +33,11 @@ spec:
           restartPolicy: OnFailure
 
           volumes:
-          - name: data-volume
-            hostPath:
-              path: /demo-data
-              type: DirectoryOrCreate
-
-          - name: backup-volume
-            hostPath:
-              path: /backups
-              type: DirectoryOrCreate
+           - name: data-volume
+             hostPath:
+               path: /demo-data
+               type: DirectoryOrCreate
+           - name: backup-volume
+             hostPath:
+               path: /backups
+               type: DirectoryOrCreate
