@@ -12,7 +12,7 @@ spec:
              name: nginx-cronjob-backup
            labels:
              app: nginx-cronjob-backup
-       spec: 
+        spec: 
          containers: 
          - name: nginx-cronjob-pod
            image: busybox:latest
@@ -25,12 +25,12 @@ spec:
              mkdir -p /demo-data &&
              cp -r /demo-data /backups &&
              echo "Backup Completed" ;
-           volumeMounts:
+         volumeMounts:
               - name: data-volume
                 mountPath: /demo-data
               - name: backup-volume
                 mountPath: /backups
-           restartPolicy: OnFailure
+         restartPolicy: OnFailure
            volumes:
               - name: data-volume
                 hostPath:
