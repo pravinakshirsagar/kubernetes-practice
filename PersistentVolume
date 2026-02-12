@@ -2,7 +2,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: local-pv
-  namespaces: nginx
+  namespace: nginx
   labels: 
     type: local-pv
 spec: 
