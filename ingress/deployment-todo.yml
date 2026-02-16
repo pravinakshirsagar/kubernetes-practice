@@ -1,0 +1,22 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata: 
+ name: todo-app-deployment
+ namespace: nginx
+spec: 
+ replicas: 1
+ selector: 
+   matchLabels: 
+      app: todo-app
+ template: 
+  metadata: 
+    name: todo-app-deploy-pod
+    labels: 
+      app: todo-app
+  spec: 
+    containers: 
+    - name: todo-app
+      image: fazilasayyed/todo:latest
+      ports:
+      - containerPort: 80
+     
