@@ -7,20 +7,20 @@ spec:
  rules:
  - http:
    paths:
-   - pathType: Prefix
-     path: /nginx
-     backend:
-     service:
+    - pathType: Prefix
+      path: /nginx
+      backend:
+      service:
        name: nginx-service
        port: 
         number: 80
-   - pathType: Prefix
-     path: /todo-app
-     backend:
-     service:
-       name: todo-service
-       port:
-        number: 8080
+    - pathType: Prefix
+      path: /todo-app
+      backend:
+      service:
+        name: todo-service
+        port:
+          number: 8080
       
    
   
